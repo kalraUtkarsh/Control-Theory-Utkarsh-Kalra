@@ -1,0 +1,222 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+
+\title{Control Theory Home Work 1}
+\author{Utkarsh Kalra BS18-03 }
+\date{Varient g}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Git repo}
+https://github.com/kalraUtkarsh/Control-Theory-Utkarsh-Kalra
+
+
+\section{TRANSFER FUNCTION CALCULATIONS}
+\includegraphics[scale =0.7]{Capture}
+$
+W1 =\frac{2}{s+5}\\*
+$
+$
+W2 = \frac{s+1}{s+0.5}\\*
+$
+$
+W3 = \frac{1}{s+0.25}\\*
+$
+$
+W4 = \frac{1}{2s+3}\\*
+$
+\subsection{2(A)}
+\includegraphics[scale=0.5]{2}
+$(xW1 - yW4)W2 = y\\*\\*
+xW1W2 - yW4W2\\*\\*
+xW1W2 = y(1+W4W2)\\*\\*
+$$
+y = \frac{xW1W2}{1+W4W2}\\*\\*
+$$
+W = {\displaystyle\frac{W1*W2*W3}{1+W4W2}}\\*
+$
+$
+W1*W2*W3 = {\displaystyle\frac{2(s+1)}{(s+5)(s+0.5)(s+0.25)}}\\*\\*\\*
+$
+$
+1+W4W2 = {\displaystyle\frac{s+1+(s+0.5)(2s+3)}{(s+0.5)(2s+3)}}\\*\\*\\*
+$
+$
+final W = {\displaystyle\frac{32s^2+80s+48}{16s^4+124s^3+250s^2+155s+25}}\\*\\*\\*$
+\subsection{2(B)}
+\subsubsection{Plot with the step}
+(There are 3 lines in the graph: blue for the input and yellow and red for the 2 systems of transfer functions but they overlap)\\*
+\includegraphics[scale = 0.8]{20}
+\includegraphics[scale=0.7]{20_2}
+\subsubsection{Plot with the frequency}
+(There are 3 lines in the graph: blue for the input and yellow and red for the 2 systems of transfer functions but they overlap)\\*
+\includegraphics[scale = 0.8]{21}
+\includegraphics[scale=0.7]{21_2}
+\subsubsection{Plot with Impulse}
+(There are 3 lines in the graph: blue for the input and yellow and red for the 2 systems of transfer functions but they overlap)\\*
+\includegraphics[scale=0.8]{22}
+\includegraphics[scale=0.7]{22_2.PNG}
+\subsection{2(C)}
+\subsubsection{Taking the step input and generating the bode plot and pole zero plot.}
+The bode plot:\\*
+\includegraphics[scale=0.7]{bodebete}\\*
+The pole zero Plot: \\*
+\includegraphics[scale=0.7]{pole_zerobete}\\*
+The given System is Stable as the bode plot is converging and the Phase margins are positive. 
+\subsection{2(D): Analyzing the Bode plot, calculating the asymptotes and frequency breaks}
+our transfer function:${\displaystyle\frac{xW1W2}{1+W4W2}}$\\*
+ = $\displaystyle\frac{\frac{2}{s+5}\frac{s+1}{s+0.5}\frac{1}{s+0.25}}{1+\frac{s+1}{s+0.5}\frac{1}{2s+3}}$
+ = ${\displaystyle\frac{48 (s+1)(\frac{s}{1.5}+1)}{25(\frac{s}{5}+1)(\frac{s}{0.25}+1)(\frac{s}{\frac{5-\sqrt{5}}{4}+1})(\frac{s}{\frac{5+\sqrt{5}}{4}+1})}} $
+ 
+ This shows that we have 2 zeroes at frequencies 1.5 and 1 and 4 poles at frequencies 5,0.25,$\frac{5-\sqrt{5}}{4}$ and $\frac{5-\sqrt{5}}{4}$ Therefore there are 6 break frequencies.
+ Asymptote 1 is a horizontal line through magnitude $A_{0} = 20log(48/25) \approx 5.57 db$
+ As we know that we can state that the next asymptotes slopes increases or decreases 20db/dec in comparison to the previous ones. And using the formula Anext = slope * log($\frac{Wnext}{Wprev}$) + Aprev, we have the table of asymptotes for magnitude plot as below.\\*
+ \begin{tabular}{ |p{1cm}||p{3cm}|p{3cm}|p{3cm}|  }
+ \hline
+ \multicolumn{4}{|r|}{Corner(point passed through)} \\
+ \hline
+ Sr.& Slope(db/dec) &Frequency(rad/sec)& Magnitude(db)\\
+ \hline
+ 1   & 0    &0.25&   5.57\\
+ 1 &   -20  & 0.25   &5.57\\
+ 2 & -40 & 0.69&  -3.25\\
+ 3    &-20 & 1&  -9.7\\
+ 4&   0  & 1.5 & -13.22\\
+ 5& -20  & 1.81   &-13.22\\
+ 6& -40  & 5 &-22.05\\
+ \hline
+\end{tabular}\\*
+As from the bode plot previously, we got gain crossover frequency of the system as 3.777rad/sec. So, the magnitude plot and frequency axis intersect at (3.777,0).
+
+\section{Total transfer function of the given loop}
+$W(s) = {\displaystyle\frac{2}{s^2+2}}$\\*
+$M(s) = {\displaystyle\frac{s+2}{2s+3}}$\\*
+\includegraphics[]{3}\\*
+By the formula given in the lab:\\*
+\includegraphics[scale = 0.4]{4}\\*\\*
+$x = {\displaystyle\frac{g(t)W(s)+f(t)M(s)}{1+W(s)}}$\\*\\*\\*\\*
+$x = {\displaystyle\frac{g(t)\frac{2}{s^2+2}+f(t)\frac{s+2}{2s+3}}{1+\frac{2}{s^2+2}}}$\\*
+\section{Finding the Transfer Function from the State Space Representation }
+\includegraphics[]{15}\\*
+As given in the lab for converting from the State Space to Transfer function the following is used:\\*
+\includegraphics[scale = 0.5]{16}
+so for our given Matrices:\\*
+
+$
+\begin{bmatrix}
+1 & 3\\
+\end{bmatrix}
+$
+(
+$
+\begin{bmatrix}
+s & 0\\
+0 & s\\
+\end{bmatrix}
+$
+-
+$
+\begin{bmatrix}
+3 & 1\\
+-2 & 2\\
+\end{bmatrix}
+$
+$)^-1$
+*
+$
+\begin{bmatrix}
+2\\
+0\\
+\end{bmatrix}
+$
++
+$
+\begin{bmatrix}
+1\\
+\end{bmatrix}
+$
+By using the ss2tf function in matlab we get:\\*
+\includegraphics[scale =0.8]{18_4}\\*
+Therefore the Transfer funtion is:\\*
+$
+TF = {\displaystyle\frac{s^2-3s-8}{s^2-5s+8}}
+$
+\section{Finding the Transfer function from the given State Space Representation}
+\includegraphics[]{17}\\*\\*\\*\\*\\*\\*\\*\\*
+As the given D Matrix has two columns this means that there will be Two tranfer functions as there are Two inputs\\*\\*\\
+And to convert SS to TF the formula is:\\*\\*\\*
+\includegraphics[scale= 0.5]{16}\\*
+So for our given matrices:
+$
+\begin{bmatrix}
+1 & 1\\
+\end{bmatrix}
+$
+(
+$
+\begin{bmatrix}
+s & 0\\
+0 & s\\
+\end{bmatrix}
+$
+-
+$
+\begin{bmatrix}
+5 & 1\\
+0 & -2\\
+\end{bmatrix}
+$
+$)^-1$
+*
+$
+\begin{bmatrix}
+0 & 2\\
+2 & 3\\
+\end{bmatrix}
+$
++
+$
+\begin{bmatrix}
+1 & 6\\
+\end{bmatrix}
+$
+By using the ss2tf function in matlab we get:\\*
+For first Input:\\*
+\includegraphics[scale=0.8]{19_1}\\*
+So the TF for this input is:\\*
+$
+TF = {\displaystyle\frac{s^2-s-18}{s^2-3s-10}}\\*
+$
+For Second input:\\*
+\includegraphics[scale =0.8]{19_2}\\*
+So the TF for this input is:
+$
+TF = {\displaystyle\frac{6s^2-13s-68}{s^2-3s-10}}\\*
+$
+\section{Simplifying the system step by step for both the Inputs x and f}
+\includegraphics[scale = 0.7]{5}\\*
+Step 1\\*
+\includegraphics[scale = 0.7]{ss1_1.PNG} \\*
+Step 2\\*
+\includegraphics[scale = 0.7]{ss2.PNG} \\*
+Step 3\\*
+\includegraphics[scale = 0.7]{ss3.PNG}\\*\\*\\*\\*
+
+
+Step 4\\*
+\includegraphics[scale = 0.7]{ss4.PNG}\\*
+Step 5\\*
+\includegraphics[scale = 0.7]{ss5.PNG}\\*
+
+Final answers:\\*
+\includegraphics[scale = 0.7]{ss6.PNG}\\*
+
+\end{document}
