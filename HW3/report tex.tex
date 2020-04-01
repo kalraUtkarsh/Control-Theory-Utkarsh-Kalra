@@ -1,0 +1,71 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+
+\title{Control Theory Home Work 3}
+\author{Utkarsh Kalra BS18-03 \and u.kalra@innopolis.university }
+
+\date{Varient d}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Git repo}
+https://github.com/kalraUtkarsh/Control-Theory-Utkarsh-Kalra
+
+
+\section{The link to the Python notebook which contains the whole task is given below}
+Link: \href{https://colab.research.google.com/drive/1q4YWi7-Kfk7zRirBQiWTubpDGOPJ317S}{Colab Link} 
+\section{PID Controller with Step input and using PidTuner for manipulations}
+$
+W = {\displaystyle\frac{3s^2+4s+10}{s^4+3s^3+7s^2+19s+30}}\\*
+$
+\subsection{The PID controller system:}
+\includegraphics[scale=0.6]{1}\\*
+
+Here the scope is connected with different outputs, One of them is with a controller system, that is PID controller system and the other is a direct connection with the transfer function.\\*
+
+This is the result with the step input:\\*
+
+\includegraphics[scale=0.8]{2}\\*
+
+In this result the blue line shows the behaviour of the system without the Controller while the yellow line shows the behaviour of the system with the PID controller.\\*
+
+As we can clearly see that the System with the Controller is much more stable. But our system is not stabalizing on 0 so the steady state error is not 0, but at the same time if the error becomes 0 that will result in output being 0.\\*
+
+The Constants Kp, Kd, Ki used here are decided by feeding this transfer function into The Pid Tuner.\\*\\*\\*
+
+
+1.\\*
+\includegraphics[scale=0.6]{3}\\*
+The image 1 show the system initially after feeding it to the PID tuner, here the rise time is not that high and small at the same time and have a small amount of overshoot as well, The staedy state error is at about 1 now.\\*
+
+2.\\*
+\includegraphics[scale=0.5]{4}\\*
+In the image 2 we tried to improve the rise time that is decrease the time and increase the response time, this resulted in a sudden increase of the Constants Kp, Kd and Ki and it also increased the overshoot by a considerable amount, The staedy state error is at about 1 now\\*
+
+3.\\*
+\includegraphics[scale=0.5]{5}\\*
+
+In the image 3 we tried to improve the overshoot that is we tried to decrease the overshoot percentage and this resulted in sudden decrease of the constants as compared to the 2nd scenario but the rise time increased, the steady state error gradually increases from 0.6\\*
+
+\includegraphics[]{6}\\*
+
+This image shows the use of DSP system time scope to find the overshoot and other things of the system without the controller.\\*
+\includegraphics[]{7}\\*
+These are the Bilevel measurements.
+\section{Lead lag compensator using control system designer}
+\includegraphics[scale=0.7]{8}
+
+
+
+
+\end{document}

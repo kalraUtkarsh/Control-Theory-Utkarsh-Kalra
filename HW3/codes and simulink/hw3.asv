@@ -1,0 +1,4 @@
+s=tf('s');
+sys = (3*(s^2)+4*s+10)/(s^4+3*(s^3)+7*(s^2)+19*s+30);
+
+controlSystemDesigner(sys);
