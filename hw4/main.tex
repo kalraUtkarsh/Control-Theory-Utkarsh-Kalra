@@ -1,0 +1,304 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+
+\title{Control Theory Home Work 3}
+\author{Utkarsh Kalra BS18-03 \and u.kalra@innopolis.university }
+
+\date{Varient g}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Git repo}
+https://github.com/kalraUtkarsh/Control-Theory-Utkarsh-Kalra
+
+
+\section{}
+\subsection{Write equations of motion of the system in manip-
+ulator form}
+
+The normal equations we get from the system we have:\\*
+$
+{\centering}\displaystyle(M+m)x''-mlcos(\theta)\theta''+mlsin(\theta)\theta^2 \\*
+l\theta''-cos(\theta)x''-gsin(\theta)=0\\*
+$\\*
+and Manipulator form is given by:\\*
+$
+\displaystyle M(q)q''+n(q,q')=Bu\\*
+u = F\\*
+q = \begin{bmatrix}
+x & \theta\\
+\end{bmatrix}^T\\*
+$\\*
+
+So by co-relating both the given forms, we get the following equations:\\*
+$
+\displaystyle
+\begin{bmatrix}
+M+m & -mlcos(\theta)\\
+\end{bmatrix}
+\begin{bmatrix}
+x''\\
+\theta''\\
+\end{bmatrix}
++
+(mlsin(sin(\theta))\theta'^2)
+=
+[1]u
+\\*
+$
+
+This is in the manipulator form but we should also consider the second equation of the system so the above system transforms to:
+\\*
+\\*
+$
+\displaystyle
+\begin{bmatrix}
+M+m & -mlcos(\theta)\\
+-cos(\theta) & l\\
+\end{bmatrix}
+\begin{bmatrix}
+x''\\
+\theta''\\
+\end{bmatrix}
++
+\begin{bmatrix}
+mlsin(\theta)\theta'^2\\
+-gsin(\theta)\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+0\\
+\end{bmatrix}
+u
+\\*\\*
+And for my Varient \textbf{g}, given m=3.6 , M=3.6 , l=1.01 the equation becomes:,\\*\\*
+\begin{bmatrix}
+10.2 & -3.636*cos(\theta)\\
+-cos(\theta) & 1.01
+\end{bmatrix}
+\begin{bmatrix}
+x''\\
+\theta''\\
+\end{bmatrix}
++
+\begin{bmatrix}
+3.636*sin(\theta)\theta'^2\\
+-9.81sin(\theta)\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1\\
+0\\
+\end{bmatrix}
+u\\*
+
+$
+
+\subsection{Write dynamics of the system in control affine non-
+linear form}
+The dynamic control affine non-liner form is given by:\\*
+\includegraphics[scale=0.8]{1}\\*
+This is taken from lab9, only in our case y is replaced by $\theta$\\*
+and representing x' and $\theta'$ through \\*
+$
+\displaystyle
+\begin{bmatrix}
+x'\\
+\theta'\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+x'\\
+\theta'\\
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+0\\
+\end{bmatrix}
+F
+$
+\\*
+And the equations of our system are same as in the previous task\\*
+So all we have to do is represent x'' and $\theta''$ as x,x',$\theta, \theta''$\\*
+$
+\displaystyle
+x'' = \frac{l\theta''-gsin(\theta)}{cos(\theta)}
+\\*
+\theta''=\frac{(M+m)x''+mlsin(\theta)\theta'^2-F}{mlcos(\theta)}
+\\*
+\theta'' = \frac{(M+m)(l\theta'')}{mlcos^2(\theta)}-\frac{(M+m)gsin(\theta)}{mlcos^2(\theta)}+tg(\theta)\theta'^2-\frac{F}{mlcos(\theta)}
+\\*
+\theta''=\frac{-(M+m)gsin(\theta)+mlcos(\theta)sin(\theta)\theta'^2-Fcos(\theta)}{mlcos^2(\theta)-(M+m)l}
+\\*
+\theta''=\frac{-(M+m)gsin(\theta)+mlcos(\theta)sin(\theta)\theta'^2}{mlcos^2(\theta)-(M+m)l}
++
+\frac{-Fcos(\theta)}{mlcos^2(\theta)-(M+m)l}
+$
+
+Now that we have the equation for $\theta''$ we can substitute it to the equation of x''.\\*
+$
+\displaystyle
+x''=\frac{-mlsin(\theta)\theta'^2+mgsin(\theta)cos(\theta)}{(M+m)-mcos^2(\theta)}+\frac{F}{(M+m)-mcos^2(\theta)}
+$\\*
+so in control affine non-linear form can be written as:\\*
+$
+\displaystyle
+\begin{bmatrix}
+x'\\
+\theta'\\
+x''\\
+\theta''\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+x'\\
+\theta'\\
+\frac{-mlsin(\theta)\theta'^2+mgsin(\theta)cos(\theta)}{(M+m)-mcos^2(\theta)}\\
+\frac{-(M+m)gsin(\theta)+mlcos(\theta)sin(\theta)\theta'^2}{mlcos^2(\theta)-(M+m)l}\\
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+0\\
+\frac{1}{(M+m)-mcos^2(\theta)}\\
+\frac{cos(\theta)}{(M+m)-mcos^2(\theta)}\\
+\end{bmatrix}
+$
+\\*
+And substituting the values for my varient:\\*
+$
+\displaystyle
+\begin{bmatrix}
+x'\\
+\theta'\\
+x''\\
+\theta''\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+x'\\
+\theta'\\
+\frac{-3.636sin(\theta)\theta'^2+35.316sin(\theta)cos(\theta)}{(7.2)-3.6cos^2(\theta)}\\
+\frac{-70.632sin(\theta)+3.636cos(\theta)sin(\theta)\theta'^2}{3.636cos^2(\theta)-7.272}\\
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+0\\
+\frac{1}{(7.2)-3.6cos^2(\theta)}\\
+\frac{cos(\theta)}{(7.2)-3.6cos^2(\theta)}\\
+\end{bmatrix}
+$
+\subsection{Linearize nonlinear dynamics of the systems around
+equilibrium point $\displaystyle\vec{z}^{\,}=
+\begin{bmatrix}
+0 & 0 & 0 & 0\\ 
+\end{bmatrix}^T
+$ }
+The linearnized form is given by:\\*
+\includegraphics[scale=0.7]{2}
+For $\vec{z}^{\,}$ to be an equilibrium point:\\*
+$
+\displaystyle
+x'=0\\*
+\theta'=0\\*
+x''=0+\frac{1}{(7.2)-3.6cos^2(\theta)}u_{e}=0\\*
+\theta''=0+\frac{cos(\theta)}{(7.2)-3.6cos^2(\theta)}=0\\*
+$
+This is true if $u_{e}$ is 0. so our system is like:\\*
+$
+\displaystyle
+\begin{bmatrix}
+x_{1}'\\
+x_{2}'\\
+x_{3}'\\
+x_{3}'\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+f_{1}(z,u)\\
+f_{2}(z,u)\\
+f_{3}(z,u)\\
+f_{4}(z,u)\\
+\end{bmatrix}
+$\\*
+And for linearizing we need A and B and the equations for finding A and B are given in the photo above.\\*
+$f_{1},f_{2},f_{3},f_{4}$ can be taken from the previous part of the task.\\*
+$
+\displaystyle
+z=
+\begin{bmatrix}
+z_{1}\\
+z_{2}\\
+z_{3}\\
+z_{4}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+x\\
+\theta\\
+x'\\
+\theta'\\
+\end{bmatrix}\\*
+f_{1}=z_{3}\\*
+f_{2}=z_{4}\\*
+f_{3}=\frac{-3.636sin(z_{2})z_{4}^2+35.316sin(z_{2})cos(z_{2})}{(7.2)-3.6cos^2(z_{2})}+\frac{u}{(7.2)-3.6cos^2(z_{2})}\\\\*
+f_{4}=\frac{-70.632sin(z_{2})+3.636cos(z_{2})sin(z_{2})z_{4}^2}{3.636cos^2(z_{2})-7.272}+\frac{cos(z_{2})u}{(7.2)-3.6cos^2(z_{2})}\\*
+A=
+\begin{bmatrix}
+0&0&1&0\\
+0&0&0&1\\
+0&9.81&-0.2778&0\\
+0&-19.4257&-0.275&0\\
+\end{bmatrix}
+B=
+\begin{bmatrix}
+0\\
+0\\
+0.2778\\
+0.275\\
+\end{bmatrix}
+$
+\subsection{Stability checking}
+this can be simply done by calculating the eigen values of the A matrix we got in the prevoius part of the task.\\*
+eigenvalues:=
+\includegraphics[]{3}
+*These are calculated in Matlab\\* 
+So it turns out the there is positive eigenvalues of A so, the system is non-stable
+\subsection{Controllability checking}
+This can be done by making a matrix
+$
+\displaystyle
+\Gamma = 
+\begin{bmatrix}
+B & AB & A^2B & A^3B\\
+\end{bmatrix}
+$
+
+And if the rank of the $\Gamma$ Matix is equal to that of A, then the system is controlable.
+\\*
+$
+\displaystyle
+\Gamma = 
+$
+\includegraphics[]{4}\\*
+So the rank of $\Gamma$ is 4 and the rank of A is 3. As you can see they both are different so the system is non-controlable.
+
+
+
+
+
+
+\end{document}
