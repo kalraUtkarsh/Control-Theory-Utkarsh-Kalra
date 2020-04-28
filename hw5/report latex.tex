@@ -1,0 +1,220 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+\title{Control Theory Home Work 5}
+\author{Utkarsh Kalra BS18-03 \and u.kalra@innopolis.university }
+
+\date{Varient g}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\section{Git repo}
+https://github.com/kalraUtkarsh/Control-Theory-Utkarsh-Kalra
+
+\section{Observers}
+\large
+We have already already defined the dynamics and other things in the previous homework as the system is the same as in the previous one.\\*
+The dynamics:\\*
+$
+\centering\large(M+m)x''-mlcos(\theta)\theta''+mlsin(\theta)\theta^2 \\*
+\theta''-cos(\theta)x''-gsin(\theta)=0\\*
+$\\*
+The system in the state space form:\\*
+$
+z' = f(z) + g(z)u\\*
+y = h(z) = 
+\begin{bmatrix}
+x & (\theta)^2\\
+\end{bmatrix}^T\\*
+where z = 
+\begin{bmatrix}
+x & (\theta) & x' & (\theta)'\\
+\end{bmatrix}^T
+$
+\\*
+And as done on the previous homework in task 2(B)\\*
+$
+\displaystyle
+\begin{bmatrix}
+x'\\
+\theta'\\
+x''\\
+\theta''\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+x'\\
+\theta'\\
+\frac{-mlsin(\theta)\theta'^2+mgsin(\theta)cos(\theta)}{(M+m)-mcos^2(\theta)}\\
+\frac{-(M+m)gsin(\theta)+mlcos(\theta)sin(\theta)\theta'^2}{mlcos^2(\theta)-(M+m)l}\\
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+0\\
+\frac{1}{(M+m)-mcos^2(\theta)}\\
+\frac{cos(\theta)}{(M+m)-mcos^2(\theta)}\\
+\end{bmatrix}
+$
+\\*
+And as done in the 2(C) of the last homework
+A = \\*
+\includegraphics[]{5_1.PNG}\\*
+B = \includegraphics[]{5_2}\\*
+My varient \textbf{g}, M=11.6, m=2.7, l=0.57\\*
+$
+A=
+\begin{bmatrix}
+0&0&1&0\\
+0&0&0&1\\
+0&2.2810&-0.0862&0\\
+0&-207.7090&-0.15124&0\\
+\end{bmatrix}
+B=
+\begin{bmatrix}
+0\\
+0\\
+0.0862\\
+0.15124\\
+\end{bmatrix}\\*
+C = 
+\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+\end{bmatrix}
+$
+\\*
+\subsection{2(A)}
+for this we have to check the rank of the observability matrix, and check the number of unobservable states. \\*
+the matrix has full rank and the unobservable states comes to be 0 in matlab, so the system is \textbf{OBSERVABLE}.
+\subsection{2(B)}
+For this we have to calculate the eigenvalues of A, and if all the values are negative then the system is stable and eigenvalues of A in my case comes out to be: \includegraphics[]{5_3.PNG}\\*
+not all values are negative so the system is \textbf{not stable}
+\subsection{2(C)LUENBERGER OBSERVER}
+Pole placement: there will be the estimation state $\hat{z}$, error by e = z -$\hat{z} $\\*
+{\centering\includegraphics[]{5_4.PNG}}\\*
+the error is given by the poles A-LC, 
+As A is 4x4 matrix we have to have 4 poles, get the L matrix and check the result.\\*
+\includegraphics[scale=0.62]{5_5_1.PNG}
+\includegraphics[scale=0.62]{5_6_1.PNG}
+\\*
+The first figure shows the unstable system system and the second figure shows the stable after adding the observer still its not staedy yet.\\*
+\newpage
+now doing the LQR\\*
+for this we need the Q and R matrices and they both will be 1
+Q = 
+$
+\begin{bmatrix}
+1&0&0&0\\
+0&1&0&0\\
+0&0&1&0\\
+0&0&0&1\\
+\end{bmatrix}
+$\\*
+R=1\\*
+\includegraphics[]{5_7.PNG}\\*
+this figure shows that the system does become stable after some time but still fluctuates.\\*
+
+\subsection{2(D)State Feedback Controller}
+it is denoted by: u= r$k_{r} - k_{z}$\\*
+so the system is\\*
+$
+\.{z} = (A-BK)z + Brk_{r} = A_[d]z + Brk_{R}\\*
+y = Cz\\*
+u = rk_{r} - Kz
+$
+\\*
+using pole placement method for designing the state feedback controller\\*
+\includegraphics[]{5_9.PNG}\\*
+
+\includegraphics[]{abhi_state.PNG}\\*
+Here both the scaled and unscaled systems follow kind of a similar pattern, yet for scaled the gain kr helps reach the steady state of the system.
+\subsection{2(E)Luenberger and State Feedback Controller}
+Here we are supposed to have both observer and controller in the system:\\*
+$
+\hat{z} = A\hat{z} + Bu + L(y-\hat{y})\\*
+\hat{y} = C\hat{z}\\*
+u = rk_{r}-K\hat{z}\\*
+So\\*
+\.{\hat{z}} = A\hat{z}+B(rk_[r]-K\hat{z})+L(z-\hat{z})\\*
+\.{e} = (A - BK - LC)e\\*
+$\\*
+\includegraphics[]{5_(e).PNG}\\*
+
+\includegraphics[]{5_10(e).PNG}\\*
+\subsection{2(F)Gaussian Noise}
+Gaussian noise is s statistical noise having a probability density function equal to that of the normal distribution, which is also known as the Gaussian distribution.\\*
+And now we need to add that to the output, so the system becomes:\\*
+$
+\.{z} = Az + bu\\*
+y = Cz + v\\*
+$
+We have to consider the noise as a new input so naturally B and D matrices have to be changed.\\*
+$
+u_{a} = \begin{bmatrix}
+u&v\\
+\end{bmatrix}^T\\*
+\.{z} = Az + 
+\begin{bmatrix}
+B&0\\
+\end{bmatrix}
+\begin{bmatrix}
+u&v\\
+\end{bmatrix}^T = Az + Bu\\*
+y=Cz+\begin{bmatrix}
+D&1\\
+\end{bmatrix}
+\begin{bmatrix}
+u&v\\
+\end{bmatrix}^T = Cz + v
+$\\*
+Now let the noise v be some random vector.\\*
+\includegraphics[]{fwala.PNG}\\*
+
+\includegraphics[]{thisisf.PNG}\\*
+Now the graph is super noisy
+\subsection{2(G)}
+$
+\.{z} = Az + bu + w\\*
+y = Cz + v\\*
+$
+similar steps as in the previous part.\\*
+$
+u_{a} = \begin{bmatrix}
+u&v&w\\
+\end{bmatrix}^T\\*
+\.{z} = Az + 
+\begin{bmatrix}
+B&0&1\\
+\end{bmatrix}
+\begin{bmatrix}
+u&v&w\\
+\end{bmatrix}^T = Az + Bu + w\\*
+y=Cz+\begin{bmatrix}
+D&1&0\\
+\end{bmatrix}
+\begin{bmatrix}
+u&v&w\\
+\end{bmatrix}^T = Cz + v
+$\\*
+\includegraphics[]{thiit.PNG}\\*
+
+\subsection{Kalman filter}
+The whole explaination of how to implement the kalman filter with matlab and what does it do is given \href{https://elib.uni-stuttgart.de/bitstream/11682/3709/1/kleinbauer.pdf}{here}.\\*
+\includegraphics[]{5_h_code.PNG}\\*
+
+\includegraphics[scale=0.8]{sahi kalman.PNG}\\*
+In this kalman is blue, the real system is red and green is the noisy system therefore kalman is pretty close to the original system.
+\subsection{2(J)LGQ}
+\includegraphics[]{5_(j).PNG}
+\end{document}
